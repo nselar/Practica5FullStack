@@ -1,5 +1,3 @@
-//En esta pagina se puede crear una cita mediante un formulario para la fecha y la hora. Se mostrara una tabla con las citas agregadas y un boton para eliminarlas
-//Se usa renderizado en el cliente para mostrar los datos
 import React, { useState } from 'react';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import styled from 'styled-components';
@@ -42,6 +40,9 @@ const REMOVE_SLOT = gql`
 
     }
 `;
+
+//El renderizado de la página se realiza en el cliente porque permite que la página se actualice sin tener que recargarla. Por lo que se ahorran
+//recursos y se mejora la experiencia de usuario al realizarse mucho más rápido.
 
 export default function Medico() {
     const [date, setDate] = useState(new Date());

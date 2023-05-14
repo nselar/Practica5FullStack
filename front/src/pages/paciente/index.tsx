@@ -31,6 +31,9 @@ const BOOK_SLOT = gql`
     }
 `;
 
+//En esta página el renderizado también se realiza en el cliente, ya que se trata de una página que se actualiza constantemente y que no necesita
+//recargar la página para mostrar los cambios. Se interactúan con los datos de los formularios y la base de datos.
+
 export default function Paciente() {
     const [date, setDate] = useState(new Date());
     const [hour, setHour] = useState(0);
