@@ -38,6 +38,7 @@ export default function Paciente() {
     const [date, setDate] = useState(new Date());
     const [hour, setHour] = useState(0);
     const [dni, setDni] = useState("");
+    let disabled = true;
     const { loading, error, data } = useQuery(GET_SLOTS, {
         variables: {
             year: date.getFullYear(),
@@ -85,8 +86,9 @@ export default function Paciente() {
                         setHour(hour);
                     }} />
                 </label>
-                {data && data.availableSlots && data.availableSlots.filter((slot: Slot) => slot.hour === hour && slot.available).length > 0 ? <p>Cita disponible</p> : <p>Cita no disponible</p>}
-                <button onClick={() => {
+                {data.availableSlots.length > 0 ? disabled = false : disabled = true}
+
+                <button disabled={disabled} onClick={() => {
                     if(!dni) return alert("Ingrese un DNI");
                     if(!hour) return alert("Ingrese una hora");
                     if(!date) return alert("Ingrese una fecha");
@@ -167,6 +169,10 @@ const StyledForm = styled.div`
 
     button:hover {
         background-color: #e6e6e6;
+    }
+    button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
     }
 
 
